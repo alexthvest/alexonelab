@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>e4235f46-ed50-49a6-ac80-c1d7271c0c43</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Replikit.Adapters.Telegram" Version="0.1.2" />
+    <PackageReference Include="Replikit.Core" Version="0.1.2" />
+  </ItemGroup>
+
+</Project>
