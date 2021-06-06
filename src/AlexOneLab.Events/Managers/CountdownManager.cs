@@ -4,22 +4,25 @@ using System.Threading.Tasks;
 using System.Timers;
 using AlexOneLab.Events.Models;
 using AlexOneLab.Events.Repositories;
+using AlexOneLab.Events.Resources;
 using MongoDB.Bson;
 using Replikit.Abstractions.Messages.Features;
 using Replikit.Abstractions.Messages.Models;
-using SmartFormat;
+using Replikit.Core.Localization;
 
 namespace AlexOneLab.Events.Managers
 {
     public class CountdownManager
     {
         private readonly CountdownRepository _countdownRepository;
-        
+        private readonly ILocalizer _localizer;
+
         private readonly Dictionary<ObjectId, Timer> _timers = new();
 
-        public CountdownManager(CountdownRepository countdownRepository)
+        public CountdownManager(CountdownRepository countdownRepository, ILocalizer localizer)
         {
             _countdownRepository = countdownRepository;
+            _localizer = localizer;
         }
 
         public async Task<Countdown> CreateAsync(Event @event, IMessageCollection messageCollection)
@@ -74,9 +77,7 @@ namespace AlexOneLab.Events.Managers
 
         private OutMessage BuildCountdownMessage(Event @event, TimeSpan span)
         {
-            var template = "Until {0}:{1:cond:>0? {1} {1:day|days}|}{2:cond:>0? {2} {2:hour|hours}|}{3:cond:>0? {3} {3:minute|minutes}|}";
-            var message = Smart.Format(template, @event.Name, span.Days, span.Hours, span.Minutes + 1);
-
+            var message = _localizer[Locale.UntilEvent, @event.Name, span.Days, span.Hours, span.Minutes + 1];
             return OutMessage.FromCode(message);
         }
 

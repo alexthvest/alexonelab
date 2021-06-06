@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AlexOneLab.Events.Resources;
 using AlexOneLab.Events.Utils;
 using Replikit.Core.Controllers.Parameters;
 
@@ -21,7 +22,7 @@ namespace AlexOneLab.Events.Converters
             
             return DateTimeOffset.TryParse(dateTimeString, out var dateTime)
                 ? ConversionResult.Success(dateTime)
-                : ConversionResult.Error<DateTimeOffset>("Invalid date");
+                : ConversionResult.Error<DateTimeOffset>(Locale.InvalidDateFormat);
         }
     }
 }

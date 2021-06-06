@@ -1,4 +1,5 @@
 ﻿using System;
+using AlexOneLab.Events.Resources;
 using AlexOneLab.Events.Utils;
 using Replikit.Core.Controllers.Parameters;
 
@@ -10,7 +11,7 @@ namespace AlexOneLab.Events.Converters
         {
             return TimeZoneOffsetParser.TryParse(parameter, out var timeSpan)
                 ? ConversionResult.Success(timeSpan)
-                : ConversionResult.Error<TimeSpan>("Invalid time");
+                : ConversionResult.Error<TimeSpan>(Locale.InvalidTimeFormat);
         }
     }
 }

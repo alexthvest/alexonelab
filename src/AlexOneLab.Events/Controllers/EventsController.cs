@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AlexOneLab.Events.Managers;
 using AlexOneLab.Events.Models;
 using AlexOneLab.Events.Repositories;
+using AlexOneLab.Events.Resources;
 using Replikit.Abstractions.Messages.Builder;
 using Replikit.Abstractions.Messages.Models;
 using Replikit.Core.Controllers;
@@ -34,7 +35,7 @@ namespace AlexOneLab.Events.Controllers
 
             if (@event is null)
             {
-                return OutMessage.FromCode("Event not found");
+                return OutMessage.FromCode(Locale.EventNotFound);
             }
 
             if (countdown is not null)
@@ -55,12 +56,12 @@ namespace AlexOneLab.Events.Controllers
 
             if (countdown is null)
             {
-                return OutMessage.FromCode("No countdown for this event was found");
+                return OutMessage.FromCode(Locale.CountdownNotFound);
             }
 
             await _countdownManager.StopAsync(countdown, Event.MessageCollection);
             
-            return OutMessage.FromCode("Countdown stopped");
+            return OutMessage.FromCode(Locale.CountdownStopped);
         }
 
         [Command("events rm")]
@@ -70,11 +71,11 @@ namespace AlexOneLab.Events.Controllers
 
             if (@event is null)
             {
-                return OutMessage.FromCode("Event not found");
+                return OutMessage.FromCode(Locale.EventNotFound);
             }
 
             await _eventRepository.Delete(@event);
-            return OutMessage.FromCode("Event removed from scheduled");
+            return OutMessage.FromCode(Locale.EventRemoved);
         }
 
         [Command("events add")]
@@ -82,13 +83,13 @@ namespace AlexOneLab.Events.Controllers
         {
             if (DateTimeOffset.UtcNow > dateTime.UtcDateTime)
             {
-                return OutMessage.FromCode("Invalid date");
+                return OutMessage.FromCode(Locale.InvalidDateFormat);
             }
             
             var @event = new Event(name, dateTime);
             await _eventRepository.Save(@event);
             
-            return OutMessage.FromCode("New event scheduled");
+            return OutMessage.FromCode(Locale.EventScheduled);
         }
 
         [Command("events")]
@@ -104,13 +105,13 @@ namespace AlexOneLab.Events.Controllers
                     : TimeZoneInfo.Local.BaseUtcOffset);
 
                 builder.AppendLine($"[{@event.Id}] {@event.Name}");
-                builder.AppendLine($"  Start: {dateTime}");
+                builder.AppendLine($"  {Locale.EventStart}: {dateTime}");
 
                 return OutMessage.FromCode(builder);
             }
             
             return new MessageBuilder()
-                .AddList(events, RenderEvent, "No upcoming events");
+                .AddList(events, RenderEvent, Locale.NoUpcomingEvents);
         }
     }
 }
