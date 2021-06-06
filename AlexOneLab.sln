@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexOneLab", "src\AlexOneLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexOneLab.Events", "src\AlexOneLab.Events\AlexOneLab.Events.csproj", "{6E4D7D99-66CC-49EA-8417-E7D81F9B699E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexOneLab.Random", "src\AlexOneLab.Random\AlexOneLab.Random.csproj", "{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +48,22 @@ Global
 		{6E4D7D99-66CC-49EA-8417-E7D81F9B699E}.Release|x64.Build.0 = Release|Any CPU
 		{6E4D7D99-66CC-49EA-8417-E7D81F9B699E}.Release|x86.ActiveCfg = Release|Any CPU
 		{6E4D7D99-66CC-49EA-8417-E7D81F9B699E}.Release|x86.Build.0 = Release|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Debug|x64.Build.0 = Debug|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Debug|x86.Build.0 = Debug|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Release|x64.ActiveCfg = Release|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Release|x64.Build.0 = Release|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{38B52A27-83D9-4AB8-8890-28AAB2D871D2} = {EAF216B3-8D60-4DD4-89B3-52A44EA33ED2}
 		{6E4D7D99-66CC-49EA-8417-E7D81F9B699E} = {EAF216B3-8D60-4DD4-89B3-52A44EA33ED2}
+		{74E18D4F-55C9-41C3-86F0-39E8854CA1BE} = {EAF216B3-8D60-4DD4-89B3-52A44EA33ED2}
 	EndGlobalSection
 EndGlobal

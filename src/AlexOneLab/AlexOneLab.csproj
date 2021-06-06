@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AlexOneLab.Events\AlexOneLab.Events.csproj" />
+    <ProjectReference Include="..\AlexOneLab.Random\AlexOneLab.Random.csproj" />
   </ItemGroup>
 
 </Project>
