@@ -1,4 +1,5 @@
-﻿using Replikit.Adapters.Telegram;
+﻿using AlexOneLab.Events;
+using Replikit.Adapters.Telegram;
 using Replikit.Core;
 using Replikit.Core.Hosting.Modules;
 
@@ -8,6 +9,8 @@ public class ProgramModule : IReplikitModule
 {
     public void ConfigureModules(IModuleCollection modules)
     {
+        modules.AddModule<EventsModule>();
+        
         modules.AddTelegram();
     }
 }

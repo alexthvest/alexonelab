@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Replikit.Core" Version="0.1.3" />
+      <PackageReference Include="Replikit.Extensions.Presentation" Version="0.1.3" />
+      <PackageReference Include="Replikit.Extensions.Storage" Version="0.1.3" />
+      <PackageReference Include="SmartFormat.NET" Version="2.7.0" />
+    </ItemGroup>
+
+</Project>
