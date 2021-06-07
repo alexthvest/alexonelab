@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="UntilEvent" xml:space="preserve">
-        <value>Until {0} remain{1:cond:&gt;0? {1} {1:day|days}|}{2:cond:&gt;0? {2} {2:hour|hours}|}{3:cond:&gt;0? {3} {3:minute|minutes}|}</value>
+        <value>Until {0} remain{1:cond:&gt;0? {1} {1:day|days}|}{2:cond:&gt;0? {2} {2:hour|hours}|} {3} {3:minute|minutes}</value>
     </data>
     <data name="InvalidTimeFormat" xml:space="preserve">
         <value>Invalid time format</value>
@@ -47,5 +47,8 @@
     </data>
     <data name="NoUpcomingEvents" xml:space="preserve">
         <value>No upcoming events</value>
+    </data>
+    <data name="EventEnded" xml:space="preserve">
+        <value>Event ended</value>
     </data>
 </root>

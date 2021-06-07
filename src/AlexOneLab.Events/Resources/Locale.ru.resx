@@ -12,7 +12,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="UntilEvent" xml:space="preserve">
-        <value>До {0} осталось{1:cond:&gt;0? {1} {1:день|дня|дней}|}{2:cond:&gt;0? {2} {2:час|часа|часов}|}{3:cond:&gt;0? {3} {3:минута|минуты|минут}|}</value>
+        <value>До {0} осталось{1:cond:&gt;0? {1} {1:день|дня|дней}|}{2:cond:&gt;0? {2} {2:час|часа|часов}|} {3} {3:минута|минуты|минут}</value>
     </data>
     <data name="InvalidTimeFormat" xml:space="preserve">
         <value>Некорректный формат времени</value>
@@ -40,5 +40,8 @@
     </data>
     <data name="NoUpcomingEvents" xml:space="preserve">
         <value>Нет предстоящих событий</value>
+    </data>
+    <data name="EventEnded" xml:space="preserve">
+        <value>Событие завершено</value>
     </data>
 </root>

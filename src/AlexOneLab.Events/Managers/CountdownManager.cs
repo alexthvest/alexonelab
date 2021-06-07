@@ -14,13 +14,15 @@ namespace AlexOneLab.Events.Managers
 {
     public class CountdownManager
     {
+        private readonly EventRepository _eventRepository;
         private readonly CountdownRepository _countdownRepository;
         private readonly ILocalizer _localizer;
 
         private readonly Dictionary<ObjectId, Timer> _timers = new();
 
-        public CountdownManager(CountdownRepository countdownRepository, ILocalizer localizer)
+        public CountdownManager(EventRepository eventRepository, CountdownRepository countdownRepository, ILocalizer localizer)
         {
+            _eventRepository = eventRepository;
             _countdownRepository = countdownRepository;
             _localizer = localizer;
         }
@@ -30,7 +32,7 @@ namespace AlexOneLab.Events.Managers
             var date = @event.DateTime;
             var now = DateTimeOffset.UtcNow.ToOffset(date.Offset);
             var span = date.Subtract(now);
-            
+
             var countdownMessage = BuildCountdownMessage(@event, span);
             
             var sentMessage = await messageCollection.Send(countdownMessage);
@@ -39,6 +41,11 @@ namespace AlexOneLab.Events.Managers
             var countdown = new Countdown(@event, sentMessage.Id);
             await _countdownRepository.Save(countdown);
 
+            if (span <= TimeSpan.Zero)
+            {
+                await StopAsync(countdown, messageCollection, false);
+            }
+
             return countdown;
         }
 
@@ -46,7 +53,7 @@ namespace AlexOneLab.Events.Managers
         {
             if (!_timers.TryGetValue(countdown.Id, out var timer))
             {
-                timer = new Timer(1000 * (60 - DateTime.UtcNow.Second));
+                timer = new Timer(1000 * (61 - DateTime.UtcNow.Second));
                 
                 timer.Elapsed += async (_, _) =>
                 {
@@ -61,22 +68,35 @@ namespace AlexOneLab.Events.Managers
             timer.Start();
         }
 
-        public async Task StopAsync(Countdown countdown, IMessageCollection messageCollection)
+        public async Task StopAsync(Countdown countdown, IMessageCollection messageCollection, bool stopped = true)
         {
             if (_timers.TryGetValue(countdown.Id, out var timer))
             {
                 timer.Stop();
                 _timers.Remove(countdown.Id);
             }
-
+            
             await messageCollection.Unpin(countdown.MessageId);
-            await messageCollection.Delete(countdown.MessageId);
 
+            if (stopped)
+            {
+                await messageCollection.Delete(countdown.MessageId);
+            }
+            else
+            {
+                await _eventRepository.Delete(countdown.Event.Id);
+            }
+            
             await _countdownRepository.Delete(countdown);
         }
 
         private OutMessage BuildCountdownMessage(Event @event, TimeSpan span)
         {
+            if (span <= TimeSpan.Zero)
+            {
+                return OutMessage.FromCode(Locale.EventEnded);
+            }
+            
             var message = _localizer[Locale.UntilEvent, @event.Name, span.Days, span.Hours, span.Minutes + 1];
             return OutMessage.FromCode(message);
         }
@@ -89,12 +109,18 @@ namespace AlexOneLab.Events.Managers
 
             if (span <= TimeSpan.Zero)
             {
-                await StopAsync(countdown, messageCollection);
-                return;
+                await StopAsync(countdown, messageCollection, false);
             }
-            
-            var countdownMessage = BuildCountdownMessage(countdown.Event, span);
-            await messageCollection.Edit(countdown.MessageId, countdownMessage);
+
+            try
+            {
+                var countdownMessage = BuildCountdownMessage(countdown.Event, span);
+                await messageCollection.Edit(countdown.MessageId, countdownMessage);
+            }
+            catch
+            {
+                // ignored
+            }
         }
     }
 }

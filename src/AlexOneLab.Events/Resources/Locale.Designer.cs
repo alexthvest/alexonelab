@@ -79,6 +79,15 @@ namespace AlexOneLab.Events.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Event ended.
+        /// </summary>
+        internal static string EventEnded {
+            get {
+                return ResourceManager.GetString("EventEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event not found.
         /// </summary>
         internal static string EventNotFound {
@@ -142,7 +151,7 @@ namespace AlexOneLab.Events.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Until {0} remain{1:cond:&gt;0? {1} {1:day|days}|}{2:cond:&gt;0? {2} {2:hour|hours}|}{3:cond:&gt;0? {3} {3:minute|minutes}|}.
+        ///   Looks up a localized string similar to Until {0} remain{1:cond:&gt;0? {1} {1:day|days}|}{2:cond:&gt;0? {2} {2:hour|hours}|} {3} {3:minute|minutes}.
         /// </summary>
         internal static string UntilEvent {
             get {
